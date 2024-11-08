@@ -14,8 +14,10 @@ import numpy as np
 # import xlwt
 # from xlsxwriter import Workbook
 
+threshModificator = 1.2
+
 def massProcessing():
-    global fileNames, img, temp_img
+    global fileNames, img, temp_img, threshModificator
     fileNames = askopenfilenames(parent=window)
     fileNames = sorted(fileNames)
     output = format(text2.get("1.0",'end-1c'))
@@ -29,7 +31,7 @@ def massProcessing():
                 print(fileNames[i])
                 img = cv2.imread(fileNames[i])
                 gray = img[:, :, 1]  # Преобразование в градации серого
-                threshold = np.mean(gray, axis=(0, 1))
+                threshold = threshModificator * np.mean(gray, axis=(0, 1))
                 # Применение пороговой сегментации
                 _, thresh = cv2.threshold(gray, threshold, 255, cv2.THRESH_BINARY)  # Здесь 127 - пороговое значение
                 print(threshold)
@@ -72,7 +74,7 @@ def massProcessing():
                 img = cv2.imread(fileNames[i])
 
                 gray = img[:, :, 1]  # Преобразование в градации серого
-                threshold = np.mean(gray, axis=(0, 1))
+                threshold = threshModificator * np.mean(gray, axis=(0, 1))
                 # Применение пороговой сегментации
                 _, thresh = cv2.threshold(gray, threshold, 255, cv2.THRESH_BINARY)  # Здесь 127 - пороговое значение
                 print(threshold)
@@ -112,7 +114,7 @@ def massProcessing():
                 print(fileNames[i])
                 img = cv2.imread(fileNames[i])
                 gray = img[:, :, 1]  # Преобразование в градации серого
-                threshold = np.mean(gray, axis=(0, 1))
+                threshold = threshModificator * np.mean(gray, axis=(0, 1))
                 # Применение пороговой сегментации
                 _, thresh = cv2.threshold(gray, threshold, 255, cv2.THRESH_BINARY)  # Здесь 127 - пороговое значение
                 print(threshold)
